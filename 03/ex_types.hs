@@ -20,7 +20,7 @@ copy :: a -> (a,a)
 copy a = (a,a) 
 
 apply :: (a -> b) -> a -> b
-apply f x = f(x) 
+apply f x = f(x)
 
 ---------- Exercise 3 ----------
 second :: Ord a => [a] -> a
