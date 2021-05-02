@@ -50,7 +50,35 @@ myElem e (x:xs)
         | otherwise = myElem e xs
 
 --------------------EXERCIS 06--------------------
+sum' :: Num a => [a] -> a
+sum' [] = 0
+sum' (x:xs) = x + sum' xs 
 
+take' :: Int -> [a] -> [a]
+take' 0 (x:xs) = []
+take' _ [] = []
+take' n (x:xs) = [x] ++ take' (n-1) xs
+
+last' :: [a] -> a
+last' [x] = x
+last' (x:xs) = last' (xs)
 --------------------EXERCIS 07--------------------
+merge :: Ord a => [a] -> [a] -> [a]
+merge xs [] = xs
+merge [] xs = xs
+merge (x:xs) (y:ys) | x <= y    = [x] ++ merge xs (y:ys)
+                    | otherwise = [y] ++ merge (x:xs) ys
 
 --------------------EXERCIS 08--------------------
+halve :: [a] -> ([a], [a])
+halve [x] = ([x],[])
+halve xs = (takeFrst, takeScnd) where
+    takeFrst = take half xs
+    takeScnd = drop half xs
+    half = (length xs) `div` 2
+
+msort :: Ord a => [a] -> [a]
+msort [] = []
+msort [x] = [x]
+msort xs = merge (msort left) (msort right) where
+    (left, right) = halve xs
