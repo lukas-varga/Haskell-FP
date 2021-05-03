@@ -1,6 +1,6 @@
-name:                MyFirstProject
+name:                pal-checker
 version:             0.1.0.0
-github:              "githubuser/MyFirstProject"
+github:              "githubuser/pal-checker"
 license:             BSD3
 author:              "Author name here"
 maintainer:          "example@example.com"
@@ -17,22 +17,19 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/MyFirstProject#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/pal-checker#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 
 library:
   source-dirs: src
-  exposed-modules:
+  excludes:
+    - Palindrome
     - Lib
-    - Split.LibSplit
-  other-modules: []
-  dependencies:
-    - split
 
 executables:
-  MyFirstProject-exe:
+  pal-checker-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -40,10 +37,10 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - MyFirstProject
+    - pal-checker
 
 tests:
-  MyFirstProject-test:
+  pal-checker-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -51,4 +48,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - MyFirstProject
+    - pal-checker

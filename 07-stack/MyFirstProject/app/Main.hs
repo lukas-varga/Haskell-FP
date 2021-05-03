@@ -1,6 +1,10 @@
 module Main where
 
 import Lib
+import Split.LibSplit
 
 main :: IO ()
-main = someFunc
+main = do
+    input <- getLine
+    let result = ourSplit input
+    print result
