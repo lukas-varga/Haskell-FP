@@ -1,3 +1,5 @@
+import Data.Char
+
 --------------------EXERCISE 01--------------------
 comp :: (Integral a) => (a -> b) -> (a -> Bool) -> [a] -> [b] 
 comp f p xs = [f x | x <- xs, p x]
@@ -32,3 +34,42 @@ filter'' p = foldr (\x xs -> doJob x xs) []
             | otherwise = xs
 
 --------------------EXERCISE 04--------------------
+capitalises :: String -> String
+capitalises = map toUpper
+
+--------------------EXERCISE 05--------------------
+squareall :: [Int] -> [Int]
+squareall = map (^2)
+
+--------------------EXERCISE 06--------------------
+nestedreverse :: [String] -> [String]
+nestedreverse (x:xs) = reverse $ map reverse (x:xs)
+
+--------------------EXERCISE 07--------------------
+atfront :: a -> [[a]] -> [[a]]
+atfront a = map (a:)
+
+--------------------EXERCISE 08--------------------
+lengths :: [String] -> [Int]
+lengths xss = map length xss
+
+--------------------EXERCISE 09--------------------
+sumsq :: Int -> Int
+sumsq n = sum $ map (^2) [1..n]
+
+--------------------EXERCISE 10--------------------
+myFilter p = concat . map box where
+    box x
+        | p x = [x]
+        | otherwise = []
+
+--------------------EXERCISE 11--------------------
+wvovel :: [Char] -> [Char]
+wvovel xs = filter isNotVowel xs
+
+isNotVowel :: Char -> Bool
+isNotVowel c = not $ elem c "aeiouy"
+
+--------------------EXERCISE 12--------------------
+wiv :: [String] -> [String]
+wiv xs = map wvovel xs
