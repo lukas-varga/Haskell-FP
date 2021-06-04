@@ -24,6 +24,14 @@ dependencies:
 
 library:
   source-dirs: src
+  exposed-modules:
+    - CleanData
+    - QuoteData
+    - Lib
+    - StatReport
+  dependencies:
+    - split
+    - time
 
 executables:
   covid-exe:

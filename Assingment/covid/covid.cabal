@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e7cc5f555a49a3cc1b9c9771f2ff580969cbbd1717d55a58082c24a9d45a6c39
+-- hash: b1bbe8b3cf25846402c96b2b69723aaaa5d2fcf8e648f902b8b4b96fa6909640
 
 name:           covid
 version:        0.1.0.0
@@ -27,13 +27,18 @@ source-repository head
 
 library
   exposed-modules:
+      CleanData
+      QuoteData
       Lib
+      StatReport
   other-modules:
       Paths_covid
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , split
+    , time
   default-language: Haskell2010
 
 executable covid-exe
