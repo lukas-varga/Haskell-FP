@@ -9,5 +9,6 @@ import Data.List.Split (splitOn)
 -- Lastly, I changed all empty "" values to 0.0 so data are easily read
 -- I found one negative value in column "new_deaths" but I assume it will not break the program
 
+-- Import data from CSV file to string
 getImportedData :: String -> [[String]]
 getImportedData csvRawData = drop 1 $ filter (/=[""]) (map (splitOn ",") $ splitOn "\n" csvRawData)
