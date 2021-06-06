@@ -1,0 +1,62 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 71a806589a8d79efa0cf971f98f3abc4bade353ddca1a651c224b4131e8597b7
+
+name:           explain
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/explain#readme>
+homepage:       https://github.com/githubuser/explain#readme
+bug-reports:    https://github.com/githubuser/explain/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2021 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/explain
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_explain
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable explain-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_explain
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , explain
+  default-language: Haskell2010
+
+test-suite explain-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_explain
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , explain
+  default-language: Haskell2010

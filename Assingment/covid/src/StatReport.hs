@@ -52,3 +52,18 @@ computeRange all onfield startString endString  = (avgNC, lowQ, highQ, daysBetwe
                     lowQ = head select
                     highQ = last select
                     daysBetween = fromIntegral $ abs $ diffDays startDay endDay
+
+-- compute median value (middle value) in given field. if number of records is odd it returns middle value, else if it is even it return average of those two middle value
+computeMedian :: [QuoteData] -> QField -> Double  
+computeMedian all onfield = res where
+                    get = field2fun onfield
+                    sorted = sortOn get all
+                    arr = map get sorted         
+                    twoAvg = (last (fst (halve arr)) + head (snd (halve arr))) / 2.0
+                    res =   if odd $ length arr then head $ snd $ halve arr
+                            else twoAvg
+                    
+-- auxiliary method for splitting array in half
+halve :: [Double] -> ([Double], [Double]) 
+halve xs = (take mid xs, drop mid xs) where
+                 mid = length xs `div` 2
