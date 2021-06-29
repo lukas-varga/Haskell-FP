@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3a354deb4c2b973650e751dd52c96addec68ee6d5b216faec6ae5b8df4beff21
+-- hash: eb303092e40750c26fe1f6a6b82f2c214298a3fc59e51f9f9565c91de94008df
 
 name:           covid2
 version:        0.1.0.0
@@ -30,12 +30,10 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
-      Charts
-      HtmlReport
-      Params
       CovidData
       StatReport
+      HtmlReport
+      Params
   other-modules:
       Paths_covid2
   hs-source-dirs:

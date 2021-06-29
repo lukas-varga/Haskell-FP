@@ -12,17 +12,17 @@ data Params = Params {
 
 mkParams :: Parser Params
 mkParams =
-  Params <$>                                    				-- final injection
-             strArgument																-- Mandatory positional FilePath arg
+  Params <$>                                            -- final injection
+             strArgument                                -- Mandatory positional FilePath arg
                (metavar "FILE" <> help "CSV file name") -- arg's name and help text in output
-         <*> switch																			-- chart is a boolean option - if 																													-- it's used, then the chart is 																														-- generated, otherwise no chart 
-         																								-- is generated.
-               (long "chart" <> short 'c' <>				
+         <*> switch                                     -- chart is a boolean option - if 																													-- it's used, then the chart is 																														-- generated, otherwise no chart 
+                                                        -- is generated.
+               (long "chart" <> short 'c' <>
                 help "generate chart")
          <*> optional (strOption $
                long "html" <> metavar "FILE" <>
                help "generate HTML report")
-         <*> switch																			-- silent is a boolean option - if 																													-- it's used, then no stats 																													     	-- are printed
+         <*> switch                                     -- silent is a boolean option - if 																													-- it's used, then no stats 																													     	-- are printed
                (long "silent" <> short 's' <>
                 help "don't print statistics")
 

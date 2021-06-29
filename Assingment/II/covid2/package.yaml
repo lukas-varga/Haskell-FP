@@ -27,12 +27,10 @@ dependencies: base >=4.12 && <4.15
 library:
   source-dirs: src
   exposed-modules: 
-    - Lib
-    - Charts
-    - HtmlReport
-    - Params
     - CovidData
     - StatReport
+    - HtmlReport
+    - Params
 
   dependencies:
     - bytestring >=0.10 && <0.12

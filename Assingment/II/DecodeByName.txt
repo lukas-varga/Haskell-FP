@@ -1,0 +1,15 @@
+decodeByName:: FromNamedRecord a => ByteString -> Either String (Header, Vector a)
+instance FromNamedRecord CoronaData where
+    parseNamedRecord m =
+      CoronaData
+       <$> m.: "date"
+       <*> m.: "total_cases"
+       <*> m.: "new_cases"
+       <*> m.: "total_deaths"
+       <*> m.: "new_deaths"
+       <*> m.: "reproduction_rate"
+       <*> m.: "icu_patients"
+       <*> m.: "total_vaccinations"
+       <*> m.: "people_vaccinated"
+       <*> m.: "people_fully_vaccinated"
+       <*> m.: "new_vaccinations"
