@@ -28,12 +28,15 @@ import Fmt (pretty, Buildable)
 
 import CovidData
     ( toDouble,
+      lostVacc,
       CovidData(date, total_cases, new_cases, total_deaths, new_deaths,
                 reproduction_rate, total_vaccinations, people_vaccinated,
-                people_fully_vaccinated, new_vaccinations) )
+                people_fully_vaccinated, new_vaccinations
+--                , lost_vaccinations
+                ))
 import StatReport
-    ( showCovid,
-      StatEntry(cfield, meanVal, minVal, maxVal, daysBetweenMinMax) )
+    ( showCovid, 
+      StatEntry(cfield, meanVal, minVal, maxVal, daysBetweenMinMax, highRoll, median))
 
 
 viaFmt :: Buildable a => a -> Html
@@ -46,6 +49,8 @@ colStats = mconcat
       , headed "Min" (viaFmt . minVal)
       , headed "Max" (viaFmt . maxVal)
       , headed "Days between Min/Max" (viaFmt . daysBetweenMinMax)
+      , headed "7 days roll" (viaFmt . highRoll)
+      , headed "Median" (viaFmt . median)
       ]
 
 colData :: Colonnade Headed CovidData Html          
@@ -60,6 +65,8 @@ colData = mconcat
       , headed "People_vaccinated" (viaFmt . showCovid .  toDouble . people_vaccinated)
       , headed "People_fully_vaccinated" (viaFmt . showCovid . toDouble . people_fully_vaccinated)
       , headed "New_vaccinations" (viaFmt . showCovid . toDouble . new_vaccinations)
+      
+      , headed "Lost_vaccinations" (viaFmt . showCovid . toDouble . lostVacc)
       ]
 
 htmlReport :: (Functor t, Foldable t) =>

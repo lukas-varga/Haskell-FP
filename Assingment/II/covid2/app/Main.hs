@@ -17,13 +17,6 @@ import Params ( cmdLineParser, Params(..) )
 main :: IO ()
 main = cmdLineParser >>= work
 
-readQuotes :: FilePath -> IO [CovidData]
-readQuotes fpath = do
-  csvData <- BL.readFile fpath
-  case decodeByName csvData of
-    Left err -> error err
-    Right (_, quotes) -> pure (toList quotes)
-
 work :: Params -> IO ()
 work params = do
   csvData <- BL.readFile (fname params)
@@ -45,3 +38,11 @@ generateReports Params {..} quotes = do
 
    saveHtml Nothing _ = pure ()
    saveHtml (Just f) html = BL.writeFile f html
+
+
+readQuotes :: FilePath -> IO [CovidData]
+readQuotes fpath = do
+  csvData <- BL.readFile fpath
+  case decodeByName csvData of
+    Left err -> error err
+    Right (_, quotes) -> pure (toList quotes)
