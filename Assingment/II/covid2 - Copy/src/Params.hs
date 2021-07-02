@@ -1,34 +1,15 @@
--- Module for handling cmd parameters
 module Params(Params (..), cmdLineParser) where
 
--- Necessary libraries
 import Options.Applicative
-    ( Parser,
-      helper,
-      (<**>),
-      optional,
-      fullDesc,
-      help,
-      info,
-      long,
-      metavar,
-      progDesc,
-      short,
-      strArgument,
-      strOption,
-      switch,
-      execParser )
 import Data.Text (Text, strip)
 
--- Data type for parameters
 data Params = Params {
         fname :: FilePath,
         htmlFile :: Maybe FilePath,
-        stats :: Bool,
-        dates :: Bool
+        silent :: Bool,
+        hide :: Bool
 }
 
--- Defining of user interface of parameters
 mkParams :: Parser Params
 mkParams =
   Params <$>
@@ -39,11 +20,10 @@ mkParams =
                long "html" <> metavar "FILE" <>
                help "generate HTML report")
              <*> switch
-                (long "stats" <> short 's' <> help "don't print overall statistics")
+                (long "silent" <> short 's' <> help "don't print overall statistics")
              <*> switch
-                (long "dates" <> short 'd' <> help "don't print stats between two dates")
+                (long "hide" <> short 'h' <> help "hide stats between two dates")
 
--- Creating parameter parser with working settings
 cmdLineParser :: IO Params
 cmdLineParser = execParser options
   where

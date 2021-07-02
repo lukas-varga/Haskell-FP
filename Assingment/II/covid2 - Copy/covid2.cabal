@@ -1,0 +1,82 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: eb303092e40750c26fe1f6a6b82f2c214298a3fc59e51f9f9565c91de94008df
+
+name:           covid2
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/covid2#readme>
+homepage:       https://github.com/githubuser/covid2#readme
+bug-reports:    https://github.com/githubuser/covid2/issues
+author:         Lukas Varga
+maintainer:     lukas.varga@st.oth-regensburg.de
+copyright:      2021 Lukas Varga
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    ChangeLog.md
+    LICENSE
+    README.md
+    stack.yaml
+    package.yaml
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/covid2
+
+library
+  exposed-modules:
+      CovidData
+      StatReport
+      HtmlReport
+      Params
+  other-modules:
+      Paths_covid2
+  hs-source-dirs:
+      src
+  build-depends:
+      Chart >=1.8 && <1.10
+    , Chart-diagrams >=1.8 && <1.10
+    , base >=4.12 && <4.15
+    , blaze-colonnade >=1.1 && <1.3
+    , blaze-html ==0.9.*
+    , bytestring >=0.10 && <0.12
+    , cassava ==0.5.*
+    , colonnade >=1.1 && <1.3
+    , fmt >=0.5 && <0.7
+    , optparse-applicative >=0.14 && <0.17
+    , text ==1.2.*
+    , time >=1.8 && <1.12
+  default-language: Haskell2010
+
+executable covid2-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_covid2
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.12 && <4.15
+    , bytestring >=0.10 && <0.12
+    , cassava ==0.5.*
+    , covid2
+    , text ==1.2.*
+  default-language: Haskell2010
+
+test-suite covid2-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_covid2
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.12 && <4.15
+    , covid2
+  default-language: Haskell2010
