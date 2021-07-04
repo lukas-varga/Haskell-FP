@@ -1,7 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+-- Module for generating HTML report
 module HtmlReport where
 
+-- Necessary libraries
 import Data.Foldable (traverse_)
 import Control.Monad (unless)
 import Data.ByteString.Lazy (ByteString)
@@ -26,22 +28,25 @@ import Colonnade ( headed, Colonnade, Headed )
 import Text.Blaze.Colonnade ( encodeHtmlTable )
 import Fmt (pretty, Buildable)
 
-import CovidData
-    ( toDouble,
+-- Importing other modules
+import CovidData(
+      toDouble,
       lostVacc,
       CovidData(date, total_cases, new_cases, total_deaths, new_deaths,
                 reproduction_rate, total_vaccinations, people_vaccinated,
                 people_fully_vaccinated, new_vaccinations
---                , lost_vaccinations
-                ))
-import StatReport
-    ( showCovid, 
-      StatEntry(cfield, meanVal, minVal, maxVal, daysBetweenMinMax, highRoll, median))
+                )
+    )
+import StatReport(
+      showCovid, 
+      StatEntry(cfield, meanVal, minVal, maxVal, daysBetweenMinMax, highRoll, median, suma)
+    )
 
-
+-- Method for formatting text
 viaFmt :: Buildable a => a -> Html
 viaFmt = text . pretty
 
+-- Statistics to be printed
 colStats :: Colonnade Headed StatEntry Html                
 colStats = mconcat
       [ headed "Quote Field" (i . string . show . cfield) 
@@ -51,8 +56,10 @@ colStats = mconcat
       , headed "Days between Min/Max" (viaFmt . daysBetweenMinMax)
       , headed "7 days roll" (viaFmt . highRoll)
       , headed "Median" (viaFmt . median)
+      , headed "Sum" (viaFmt . suma)
       ]
 
+-- All data to be printed
 colData :: Colonnade Headed CovidData Html          
 colData = mconcat
       [ headed "Day" (viaFmt . date)
@@ -68,8 +75,8 @@ colData = mconcat
       , headed "Lost_vaccinations" (viaFmt . showCovid . toDouble . lostVacc)
       ]
 
-htmlReport :: (Functor t, Foldable t) =>
-              String -> t CovidData -> [StatEntry] -> ByteString
+-- Method for generating HTML output
+htmlReport :: (Functor t, Foldable t) => String -> t CovidData -> [StatEntry] -> ByteString
 htmlReport docTitle quotes statEntries = renderHtml $ docTypeHtml $ do
      H.head $ do
        title $ string docTitle
