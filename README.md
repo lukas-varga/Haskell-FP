@@ -1,2 +1,2 @@
 # Haskell-FP
-OTH Functional Programming
+Haskell (Functional Programming)
